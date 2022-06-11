@@ -1,0 +1,8 @@
+.editButton {
+    font-size: 14px;
+    background: #fca130;
+    color: aliceblue;
+    border: 1px solid #c16b00;
+    cursor: pointer;
+    padding: 5px 10px;
+}
