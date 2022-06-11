@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+}
+
+.App {
+    width: 800px;
+}
+
+.note {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    border: 2px solid #d3e1fb7a;
+    background-color: #edf2fb7a;
+    margin-top: 15px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+}
+
+.note__author {
+    width: 100%;
+    font-size: 24px;
+    color: #0007d98c;
+}
+
+.note__content {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #303340f2;
+}
+
+.note__created {
+    font-size: 16px;
+    font-weight: bold;
+    color: #0007d98c;
+}
