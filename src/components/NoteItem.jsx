@@ -1,12 +1,23 @@
-import React from 'react';
+import React,
+{
+    useState,
+} from 'react';
 import { format } from '../utils/format/DateFormat';
 import DeleteButton from './ui/button/DeleteButton';
 import EditButton from './ui/button/EditButton';
+import Modal from './ui/modal/Modal';
+import NoteFormEdit from './NoteFormEdit';
 
-const NoteItem = ({note}) => {
+const NoteItem = ({note, callOnDeleteNote, callOnEditNote}) => {
+    const [modal, setModal] = useState(false);
+    const onSetModalVisible = () => setModal(false);
 
     return(
         <div className="note">
+
+            <Modal visible={modal} setVisible={setModal}>
+                <NoteFormEdit note={note} callOnEditNote={callOnEditNote} callOnSetModalVisible={onSetModalVisible} />
+            </Modal>
 
             <div className="note__author">
                 {note.author.username}
@@ -19,8 +30,8 @@ const NoteItem = ({note}) => {
             </div>
 
             <div className="note_btn">
-                <EditButton disabled>Редактировать</EditButton>
-                <DeleteButton>Удалить</DeleteButton>
+                <EditButton onClick={() => setModal(true)}>Редактировать</EditButton>
+                <DeleteButton onClick={() => callOnDeleteNote(note)}>Удалить</DeleteButton>
             </div>
 
         </div>

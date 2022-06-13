@@ -27,6 +27,22 @@ const Note = () => {
         setModal(false);
     };
 
+    const onEditNote = async (note) => {
+        const newNote = await NoteService.edit(note);
+        
+        setNote(notes.map(
+            note => note.note_id === newNote.note_id ? newNote : note
+        ));
+    };
+
+    const onDeleteNote = async (note) => {
+        const oldNote = await NoteService.delete(note);
+
+        setNote(notes.filter(
+            note => note.note_id !== oldNote.note_id
+        ));
+    };
+
     return(
         <div>
             <Modal visible={modal} setVisible={setModal}>
@@ -49,7 +65,11 @@ const Note = () => {
                 </CreateButton>
             </div>
             
-            <NoteList notes={notes}/>
+            <NoteList
+                notes={notes}
+                callOnDeleteNote={onDeleteNote}
+                callOnEditNote={onEditNote}
+            />
         </div>
     );
 };
