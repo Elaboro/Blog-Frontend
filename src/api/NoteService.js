@@ -1,15 +1,16 @@
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default class NoteService {
-    static URL = "http://localhost:3001";
 
     static async getList() {
-        const response = await axios.get(`${this.URL}/blog/note`);
+        const response = await axios.get(`${API_URL}/blog/note`);
         return response.data;
     }
 
     static async create(newNote) {
-        const response = await axios.post(`${this.URL}/blog/note/create`,
+        const response = await axios.post(`${API_URL}/blog/note/create`,
             newNote,
             {
                 headers: {
@@ -21,7 +22,7 @@ export default class NoteService {
     }
 
     static async delete({note_id}) {
-        const response = await axios.delete(`${this.URL}/blog/note/delete`,
+        const response = await axios.delete(`${API_URL}/blog/note/delete`,
             {
                 headers: {
                     Authorization: localStorage.getItem("token")
@@ -33,7 +34,7 @@ export default class NoteService {
     }
 
     static async edit({note_id, content}) {
-        const response = await axios.put(`${this.URL}/blog/note/edit`,
+        const response = await axios.put(`${API_URL}/blog/note/edit`,
             {
                 note_id,
                 content
