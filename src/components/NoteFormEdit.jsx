@@ -5,7 +5,13 @@ import React,
 import CreateButton from "./ui/button/CreateButton";
 import ContentInput from "./ui/input/ContentInput";
 
-const NoteFormEdit = ({note, callOnEditNote, callOnSetModalVisible}) => {
+const NoteFormEdit = (props) => {
+    const {
+        note,
+        callOnEditNote,
+        callOnSetModalVisible,
+    } = props;
+
     const [content, setContent] = useState(note.content);
 
     const editNote = async (e) => {

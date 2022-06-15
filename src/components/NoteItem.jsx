@@ -8,7 +8,13 @@ import EditButton from './ui/button/EditButton';
 import Modal from './ui/modal/Modal';
 import NoteFormEdit from './NoteFormEdit';
 
-const NoteItem = ({note, callOnDeleteNote, callOnEditNote}) => {
+const NoteItem = (props) => {
+    const {
+        note,
+        callOnDeleteNote,
+        callOnEditNote,
+    } = props;
+
     const [modal, setModal] = useState(false);
     const onSetModalVisible = () => setModal(false);
 
@@ -16,7 +22,11 @@ const NoteItem = ({note, callOnDeleteNote, callOnEditNote}) => {
         <div className="note">
 
             <Modal visible={modal} setVisible={setModal}>
-                <NoteFormEdit note={note} callOnEditNote={callOnEditNote} callOnSetModalVisible={onSetModalVisible} />
+                <NoteFormEdit
+                    note={note}
+                    callOnEditNote={callOnEditNote}
+                    callOnSetModalVisible={onSetModalVisible}
+                />
             </Modal>
 
             <div className="note__author">
