@@ -44,3 +44,13 @@
     font-weight: bold;
     color: #0007d98c;
 }
+
+.note__panel_control {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.note__title {
+    text-align: center;
+    color: #0810ffa1;
+}

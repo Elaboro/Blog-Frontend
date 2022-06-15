@@ -49,17 +49,11 @@ const Note = () => {
                 <NoteForm callOnCreateNote={onCreateNote} />
             </Modal>
 
-            <h1 style={{
-                textAlign: 'center',
-                color: "#0810ffa1"
-            }}>
+            <h1 className="note__title">
                 Блог на React
             </h1>
             
-            <div style={{
-                display: 'flex',
-                justifyContent: 'flex-end'
-            }}>
+            <div className="note__panel_control">
                 <CreateButton onClick={()=> setModal(true)}>
                     Создать пост
                 </CreateButton>
