@@ -1,17 +1,20 @@
 import React,
 {
+    useContext,
     useEffect,
-    useState
+    useState,
 } from "react";
 import NoteService from "../api/NoteService";
 import NoteForm from "../components/NoteForm";
 import NoteList from "../components/NoteList";
 import CreateButton from "../components/ui/button/CreateButton";
 import Modal from "../components/ui/modal/Modal";
+import { AuthContext } from "../context";
 
 const Note = () => {
     const [notes, setNote] = useState([]);
     const [modal, setModal] = useState(false);
+    const { isAuth } = useContext(AuthContext);
 
     useEffect(() => {
         fetchNotes();
@@ -54,9 +57,11 @@ const Note = () => {
             </h1>
             
             <div className="note__panel_control">
+                {isAuth && 
                 <CreateButton onClick={()=> setModal(true)}>
                     Создать пост
                 </CreateButton>
+                }
             </div>
             
             <NoteList

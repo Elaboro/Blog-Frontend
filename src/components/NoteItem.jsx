@@ -1,5 +1,6 @@
 import React,
 {
+    useContext,
     useState,
 } from 'react';
 import { format } from '../utils/format/DateFormat';
@@ -7,6 +8,7 @@ import DeleteButton from './ui/button/DeleteButton';
 import EditButton from './ui/button/EditButton';
 import Modal from './ui/modal/Modal';
 import NoteFormEdit from './NoteFormEdit';
+import { AuthContext } from '../context';
 
 const NoteItem = (props) => {
     const {
@@ -14,6 +16,13 @@ const NoteItem = (props) => {
         callOnDeleteNote,
         callOnEditNote,
     } = props;
+
+    const {
+        isAuth, 
+        user: { id },
+    } = useContext(AuthContext);
+
+    const isAuthor = id === note.author.user_id;
 
     const [modal, setModal] = useState(false);
     const onSetModalVisible = () => setModal(false);
@@ -39,10 +48,12 @@ const NoteItem = (props) => {
                 {format(note.created)}
             </div>
 
+            {isAuth && isAuthor &&
             <div className="note_btn">
                 <EditButton onClick={() => setModal(true)}>Редактировать</EditButton>
                 <DeleteButton onClick={() => callOnDeleteNote(note)}>Удалить</DeleteButton>
             </div>
+            }
 
         </div>
     );
