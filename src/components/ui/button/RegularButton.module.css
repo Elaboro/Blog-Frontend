@@ -1,0 +1,8 @@
+.regularButton {
+    font-size: 14px;
+    background: #699ee2;
+    color: aliceblue;
+    border: 1px solid #2d4a6e;
+    cursor: pointer;
+    padding: 5px 10px;
+}

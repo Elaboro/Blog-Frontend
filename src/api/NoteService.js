@@ -2,9 +2,11 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const config = {
-    headers: {
-        Authorization: localStorage.getItem("token"),
+const getConfig = () => {
+    return {
+        headers: {
+            Authorization: localStorage.getItem("token"),
+        }
     }
 };
 
@@ -20,7 +22,7 @@ export default class NoteService {
 
         const response = await axios.post(`${API_URL}/blog/note/create`,
             data,
-            config
+            getConfig()
         );
         return response.data;
     }
@@ -38,7 +40,7 @@ export default class NoteService {
 
         const response = await axios.delete(`${API_URL}/blog/note/delete`,
             {
-                ...config,
+                ...getConfig(),
                 data
             }
         );
@@ -58,7 +60,7 @@ export default class NoteService {
 
         const response = await axios.put(`${API_URL}/blog/note/edit`,
             data,
-            config
+            getConfig()
         );
         return response.data;
     }
