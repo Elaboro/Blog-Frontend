@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { ButtonProps } from '../../../type/Type';
 import classes from './CreateButton.module.css'
 
-const CreateButton = ({children, ...props}) => {
+const CreateButton: FC<ButtonProps> = ({
+    children,
+    ...props
+}) => {
     return (
         <button
             className={classes.createButton}

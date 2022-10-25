@@ -1,20 +1,29 @@
 import React,
 {
+    FC,
     useState,
 } from "react";
 import CreateButton from "./ui/button/CreateButton";
 import ContentInput from "./ui/input/ContentInput";
+import {
+  INote,
+  INoteEdit,
+} from "../api/entity/type";
 
-const NoteFormEdit = (props) => {
-    const {
-        note,
-        callOnEditNote,
-        callOnSetModalVisible,
-    } = props;
+interface NoteFormEditProps {
+    note: INote;
+    callOnEditNote: (note: INoteEdit) => void;
+    callOnSetModalVisible: (value: boolean) => void;
+};
 
-    const [content, setContent] = useState(note.content);
+const NoteFormEdit: FC<NoteFormEditProps> = ({
+    note,
+    callOnEditNote,
+    callOnSetModalVisible
+}) => {
+    const [content, setContent] = useState<string>(note.content);
 
-    const editNote = async (e) => {
+    const editNote = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
         const newNote = {

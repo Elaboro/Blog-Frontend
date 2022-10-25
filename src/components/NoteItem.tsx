@@ -2,27 +2,41 @@ import React,
 {
     useContext,
     useState,
+    FC
 } from 'react';
 import { format } from '../utils/format/DateFormat';
 import DeleteButton from './ui/button/DeleteButton';
 import EditButton from './ui/button/EditButton';
 import Modal from './ui/modal/Modal';
 import NoteFormEdit from './NoteFormEdit';
-import { AuthContext } from '../context';
+import {
+  AuthContext,
+  AuthContextProps
+} from '../context';
+import {
+  INote,
+  INoteDelete,
+  INoteEdit
+} from "../api/entity/type";
 
-const NoteItem = (props) => {
+export interface NoteItemProps {
+  note: INote;
+  key: INote["note_id"];
+  callOnDeleteNote: (note: INoteDelete) => void;
+  callOnEditNote: (note: INoteEdit) => void;
+};
+
+const NoteItem: FC<NoteItemProps> = ({
+  note,
+  callOnDeleteNote,
+  callOnEditNote,
+}) => {
     const {
-        note,
-        callOnDeleteNote,
-        callOnEditNote,
-    } = props;
+        isAuth,
+        user: { user_id },
+    } = useContext<AuthContextProps>(AuthContext);
 
-    const {
-        isAuth, 
-        user: { id },
-    } = useContext(AuthContext);
-
-    const isAuthor = id === note.author.user_id;
+    const isAuthor = user_id === note.author.user_id;
 
     const [modal, setModal] = useState(false);
     const onSetModalVisible = () => setModal(false);

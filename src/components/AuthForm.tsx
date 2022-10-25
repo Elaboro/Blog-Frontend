@@ -1,15 +1,21 @@
 import React,
 {
+    FC,
     useState,
 } from "react";
 import CreateButton from "./ui/button/CreateButton";
 import ContentInput from "./ui/input/ContentInput";
+import { AuthUser } from "../api/entity/type";
 
-const AuthForm = ({callOnCallback}) => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+interface AuthFormProps {
+    callOnCallback: (value: AuthUser) => void
+};
 
-    const next = async (e) => {
+const AuthForm: FC<AuthFormProps> = ({callOnCallback}) => {
+    const [username, setUsername] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+
+    const next = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
     
         const data = {
@@ -27,14 +33,14 @@ const AuthForm = ({callOnCallback}) => {
         <form>
             <ContentInput
                 value={username}
-                onChange={e => setUsername(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
                 type="text"
                 placeholder="Логин"
             />
 
             <ContentInput
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                 type="password"
                 placeholder="Пароль"
             />

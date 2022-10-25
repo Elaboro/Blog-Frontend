@@ -1,31 +1,27 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import {
+  AuthPayload,
+  AuthUser,
+  IUser,
+} from "./entity/type";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default class AuthService {
 
-    static async login (username, password) {
-        const data = {
-            username,
-            password,
-        };
-
-        const response = await axios.post(`${API_URL}/auth/login`, data);
-
-        localStorage.setItem("token", "Bearer " + response.data.token);
-        return jwtDecode(response.data.token);
+    static async login (user: AuthUser): Promise<IUser> {
+        const response = await axios.post<AuthPayload>(`${API_URL}/auth/login`, user);
+        return this.authorize(response.data);
     }
 
-    static async register (username, password) {
-        const data = {
-            username,
-            password,
-        };
+    static async register (user: AuthUser): Promise<IUser> {
+        const response = await axios.post<AuthPayload>(`${API_URL}/auth/register`, user);
+        return this.authorize(response.data);
+    }
 
-        const response = await axios.post(`${API_URL}/auth/register`, data);
-
-        localStorage.setItem("token", "Bearer " + response.data.token);
-        return jwtDecode(response.data.token);
+    private static authorize (payload: AuthPayload): Promise<IUser> {
+        localStorage.setItem("token", "Bearer " + payload.token);
+        return jwtDecode(payload.token);
     }
 }

@@ -9,12 +9,20 @@ import NoteForm from "../components/NoteForm";
 import NoteList from "../components/NoteList";
 import CreateButton from "../components/ui/button/CreateButton";
 import Modal from "../components/ui/modal/Modal";
-import { AuthContext } from "../context";
+import {
+  AuthContext,
+  AuthContextProps,
+} from "../context";
+import {
+  INote,
+  INoteDelete,
+  INoteEdit,
+} from "../api/entity/type";
 
 const Note = () => {
-    const [notes, setNote] = useState([]);
-    const [modal, setModal] = useState(false);
-    const { isAuth } = useContext(AuthContext);
+    const [notes, setNote] = useState<INote[]>([]);
+    const [modal, setModal] = useState<boolean>(false);
+    const { isAuth } = useContext<AuthContextProps>(AuthContext);
 
     useEffect(() => {
         fetchNotes();
@@ -25,12 +33,12 @@ const Note = () => {
         setNote(notes);
     };
 
-    const onCreateNote = (newNote) => {
+    const onCreateNote = (newNote: INote) => {
         setNote([...notes, newNote]);
         setModal(false);
     };
 
-    const onEditNote = async (note) => {
+    const onEditNote = async (note: INoteEdit) => {
         const newNote = await NoteService.edit(note);
         
         setNote(notes.map(
@@ -38,7 +46,7 @@ const Note = () => {
         ));
     };
 
-    const onDeleteNote = async (note) => {
+    const onDeleteNote = async (note: INoteDelete) => {
         const oldNote = await NoteService.delete(note);
 
         setNote(notes.filter(

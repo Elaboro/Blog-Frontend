@@ -1,15 +1,23 @@
 import React,
 {
+    FC,
     useState,
 } from "react";
 import NoteService from "../api/NoteService";
 import CreateButton from "./ui/button/CreateButton";
 import ContentInput from "./ui/input/ContentInput";
+import { INote } from "../api/entity/type";
 
-const NoteForm = ({callOnCreateNote}) => {
-    const [content, setContent] = useState("");
+interface NoteFormProps {
+    callOnCreateNote: (note: INote) => void;
+}
 
-    const addNewNote = async (e) => {
+const NoteForm: FC<NoteFormProps> = ({
+    callOnCreateNote
+}) => {
+    const [content, setContent] = useState<string>("");
+
+    const addNewNote = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
     
         const newNote = await NoteService.create({

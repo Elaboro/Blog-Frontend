@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { ButtonProps } from '../../../type/Type';
 import classes from './DeleteButton.module.css'
 
-const DeleteButton = ({children, ...props}) => {
+const DeleteButton: FC<ButtonProps> = ({
+    children,
+    ...props
+}) => {
     return (
         <button
             className={classes.deleteButton}

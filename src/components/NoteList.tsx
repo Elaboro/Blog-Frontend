@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { FC } from 'react';
 import NoteItem from './NoteItem';
+import {
+  INote,
+  INoteDelete,
+  INoteEdit
+} from "../api/entity/type";
 
-const NoteList = ({notes, ...props}) => {
+interface NoteListProps {
+    notes: INote[];
+    callOnDeleteNote: (note: INoteDelete) => void;
+    callOnEditNote: (note: INoteEdit) => void;
+};
+
+const NoteList: FC<NoteListProps> = ({
+    notes,
+    ...props
+}) => {
     return(
         <div>
-            {notes.map(note =>
+            {notes.map((note: INote) =>
                 <NoteItem
                     note={note}
                     key={note.note_id}
