@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import classes from './Modal.module.css';
-import { IReactNode } from "../../../type/Type";
 
-export interface ModalProps extends IReactNode {
+export interface ModalProps {
     visible: boolean;
     setVisible: (value: boolean) => void;
+    children: React.ReactNode;
 }
 
 const Modal: FC<ModalProps> = ({

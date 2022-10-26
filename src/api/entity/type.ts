@@ -11,16 +11,16 @@ export interface INote {
 }
 
 export interface INoteCreate {
-    content: string;
+    content: INote["content"];
 }
 
 export interface INoteEdit {
-    note_id: string;
-    content: string;
+    note_id: INote["note_id"];
+    content: INote["content"];
 }
 
 export interface INoteDelete {
-    note_id: string;
+    note_id: INote["note_id"];
 }
 
 export interface AuthPayload {

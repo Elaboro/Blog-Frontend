@@ -8,10 +8,10 @@ import ContentInput from "./ui/input/ContentInput";
 import { AuthUser } from "../api/entity/type";
 
 interface AuthFormProps {
-    callOnCallback: (value: AuthUser) => void
+    callOnAuthorizeUser: (value: AuthUser) => void
 };
 
-const AuthForm: FC<AuthFormProps> = ({callOnCallback}) => {
+const AuthForm: FC<AuthFormProps> = ({callOnAuthorizeUser}) => {
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -23,7 +23,7 @@ const AuthForm: FC<AuthFormProps> = ({callOnCallback}) => {
             password,
         };
     
-        callOnCallback(data);
+        callOnAuthorizeUser(data);
         
         setUsername("");
         setPassword("");

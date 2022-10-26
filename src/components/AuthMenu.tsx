@@ -66,12 +66,12 @@ const Menu = () => {
                 : <div>
                     <Modal visible={modalLogin} setVisible={setModalLogin}>
                         <div className='auth__title'>Авторизация</div>
-                        <AuthForm callOnCallback={onLogin} />
+                        <AuthForm callOnAuthorizeUser={onLogin} />
                     </Modal>
 
                     <Modal visible={modalRegister} setVisible={setModalRegister}>
                         <div className='auth__title'>Регистрация</div>
-                        <AuthForm callOnCallback={onRegister} />
+                        <AuthForm callOnAuthorizeUser={onRegister} />
                     </Modal>
 
                     <RegularButton onClick={()=> setModalLogin(true)}>Авторизоваться</RegularButton>
